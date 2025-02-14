@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTR Games</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        main {
+            padding: 2rem;
+            text-align: center; /* Center the content */
+        }
+
+        .app-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            background-color: white; /* White background for the app cards */
+            box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* Add a subtle shadow */
+            display: inline-block; /* Arrange cards side by side */
+            width: 30%; /* Adjust width for desired layout */
+            vertical-align: top; /* Align cards to the top of the container */
+            margin: 1%; /* Spacing between the cards */
+        }
+
+        .app-card img {
+            max-width: 100px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .app-card h2 {
+            margin-bottom: 5px;
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff; /* Blue button */
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .download-button:hover {
+            background-color: #0056b3; /* Darker blue on hover */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem 0;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Welcome to MTR Games</h1>
+</header>
+
+<main>
+    <div class="app-card">
+        <img src="../O.png" alt="App 1 Icon">
+        <iframe src="../OX.html" width="400" height="500"></iframe>
+        <h2>Tic-Tac-Toe</h2>
+        <p>Available on skill games.</p>
+    </div>
+
+    <div class="app-card">
+        <img src="../Maths%20Quiz.png" alt="App 2 Icon">
+        <iframe src="../Maths.html" width="400" height="200"></iframe>
+        <h2>Maths Quiz</h2>
+        <p>Helps in solving Maths Questions.</p>
+    </div>
+
+    <div class="app-card">
+        <img src="../snake.png" alt="App 3 Icon">
+        <iframe src="../Snake.html" width="400" height="400"></iframe>
+        <h2>Snake Game</h2>
+        <p>Available on skill games.</p>
+    </div>
+
+    <div class="app-card">
+        <img src="../word.png" alt="App 3 Icon">
+        <iframe src="../WordSearch.html" width="400" height="550"></iframe>
+        <h2>Word Search</h2>
+        <p>Available on skill games.</p>
+    </div>
+
+</main>
+
+</body>
+</html>
