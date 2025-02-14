@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tic-Tac-Toe</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+    }
+
+    #gameboard {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      grid-gap: 5px;
+      margin: 20px auto; /* Center the board */
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      border: 1px solid #ccc;
+      font-size: 60px;
+      text-align: center;
+      line-height: 100px; /* Vertically center text */
+      cursor: pointer; /* Indicate clickable cells */
+    }
+
+    #message {
+      margin-top: 20px;
+      font-size: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin-top: 20px;
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      cursor: pointer;
+      border-radius: 5px; /* Rounded corners */
+    }
+
+    button:hover {
+      background-color: #45a049; /* Darker green on hover */
+    }
+  </style>
+</head>
+<body>
+
+<h1>Tic-Tac-Toe</h1>
+
+<div id="gameboard">
+  <div class="cell" data-index="0"></div>
+  <div class="cell" data-index="1"></div>
+  <div class="cell" data-index="2"></div>
+  <div class="cell" data-index="3"></div>
+  <div class="cell" data-index="4"></div>
+  <div class="cell" data-index="5"></div>
+  <div class="cell" data-index="6"></div>
+  <div class="cell" data-index="7"></div>
+  <div class="cell" data-index="8"></div>
+</div>
+
+<div id="message"></div>
+<button onclick="resetGame()">Reset Game</button>
+
+
+<script>
+  let currentPlayer = "X";
+  let gameBoard = ["", "", "", "", "", "", "", "", ""];
+  let gameOver = false;
+
+  const cells = document.querySelectorAll(".cell");
+  const message = document.getElementById("message");
+
+  cells.forEach(cell => {
+    cell.addEventListener("click", handleCellClick);
+  });
+
+  function handleCellClick(event) {
+    if (gameOver) return;
+
+    const cell = event.target;
+    const index = cell.dataset.index;
+
+    if (gameBoard[index] === "") {
+      gameBoard[index] = currentPlayer;
+      cell.textContent = currentPlayer;
+      checkWin();
+      switchPlayer();
+    }
+  }
+
+  function checkWin() {
+    const winPatterns = [
+      [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
+      [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
+      [0, 4, 8], [2, 4, 6]             // Diagonals
+    ];
+
+    for (let pattern of winPatterns) {
+      const [a, b, c] = pattern;
+      if (gameBoard[a] && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+        message.textContent = `${currentPlayer} wins!`;
+        gameOver = true;
+        highlightWinningCells(pattern); // Highlight winning cells
+        return;
+      }
+    }
+
+    // Check for a draw
+    if (gameBoard.every(cell => cell !== "")) {
+      message.textContent = "It's a draw!";
+      gameOver = true;
+    }
+  }
+
+  function highlightWinningCells(pattern) {
+    const cells = document.querySelectorAll('.cell');
+    pattern.forEach(index => {
+      cells[index].style.backgroundColor = 'lightgreen'; // Or any other highlight style
+    });
+  }
+
+
+  function switchPlayer() {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    message.textContent = `It's ${currentPlayer}'s turn`;
+  }
+
+  function resetGame() {
+    currentPlayer = "X";
+    gameBoard = ["", "", "", "", "", "", "", "", ""];
+    gameOver = false;
+    message.textContent = "";
+    cells.forEach(cell => {
+      cell.textContent = "";
+      cell.style.backgroundColor = ''; // Reset cell background color
+    });
+  }
+
+  // Set initial message
+  message.textContent = `It's ${currentPlayer}'s turn`;
+
+</script>
+
+</body>
+</html>

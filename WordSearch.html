@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Word Search</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        #game-board {
+            display: grid;
+            grid-template-columns: repeat(10, 30px); /* Adjust grid size */
+            grid-template-rows: repeat(10, 30px); /* Adjust grid size */
+            border: 2px solid #ccc;
+            margin: 20px auto;
+        }
+
+        .cell {
+            width: 30px;
+            height: 30px;
+            border: 1px solid #eee; /* Light border */
+            font-size: 20px;
+            text-align: center;
+            line-height: 30px; /* Vertically center text */
+            cursor: pointer;
+            user-select: none; /* Prevent text selection */
+        }
+
+        #word-list {
+            margin-top: 20px;
+        }
+
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Word Search</h1>
+
+<div id="game-board"></div>
+
+<div id="word-list">
+    Find these words:
+    <ul id="words">
+    </ul>
+</div>
+
+<div id="message"></div>
+
+<script>
+    const gameBoard = document.getElementById("game-board");
+    const wordList = document.getElementById("word-list");
+    const wordsElement = document.getElementById("words");
+    const message = document.getElementById("message");
+
+    let gridSize = 10; // Adjust for board size
+    let grid = [];
+    let words = ["CAT", "DOG", "BIRD", "FISH", "TREE"]; // Your word list
+    let foundWords = [];
+    let selectedCells = [];
+
+    function createBoard() {
+        grid = []; // Clear the grid
+        gameBoard.innerHTML = ""; // Clear the board display
+
+        for (let i = 0; i < gridSize; i++) {
+            grid[i] = [];
+            const row = document.createElement("div");
+            for (let j = 0; j < gridSize; j++) {
+                const cell = document.createElement("div");
+                cell.classList.add("cell");
+                const letter = String.fromCharCode(65 + Math.floor(Math.random() * 26)); // Random letter
+                cell.textContent = letter;
+                cell.dataset.row = i; // Store row and column
+                cell.dataset.col = j;
+                cell.addEventListener("mousedown", startSelection);
+                cell.addEventListener("mouseover", continueSelection);
+                cell.addEventListener("mouseup", endSelection);
+
+                row.appendChild(cell);
+                grid[i][j] = letter;
+            }
+            gameBoard.appendChild(row);
+        }
+    }
+
+    function displayWords() {
+        words.forEach(word => {
+            const li = document.createElement('li');
+            li.textContent = word;
+            wordsElement.appendChild(li);
+        });
+    }
+
+    let isSelecting = false;
+    let startCell;
+
+    function startSelection(event) {
+        isSelecting = true;
+        startCell = event.target;
+        selectedCells = [startCell];
+        startCell.classList.add('selected');
+    }
+
+    function continueSelection(event) {
+        if (isSelecting && event.target.classList.contains('cell')) {
+            const currentCell = event.target;
+            if (!selectedCells.includes(currentCell)) {
+                selectedCells.push(currentCell);
+                currentCell.classList.add('selected');
+            }
+        }
+    }
+
+    function endSelection() {
+        isSelecting = false;
+        let selectedWord = "";
+        selectedCells.forEach(cell => selectedWord += cell.textContent);
+
+        const reversedWord = selectedWord.split("").reverse().join("");
+
+        if (words.includes(selectedWord) || words.includes(reversedWord)) {
+            const foundWord = words.includes(selectedWord) ? selectedWord : reversedWord
+            if (!foundWords.includes(foundWord)) {
+                foundWords.push(foundWord);
+                message.textContent = `Found: ${foundWord}!`;
+                message.style.color = "green";
+
+                // Highlight the found word
+                selectedCells.forEach(cell => cell.classList.add('found'));
+
+                // Remove found word from list
+                const wordIndex = words.indexOf(foundWord);
+                words.splice(wordIndex, 1);
+                wordsElement.innerHTML = ''; // Clear the list
+                displayWords(); // Re-render the list
+
+                if (words.length === 0) {
+                    message.textContent = "You found all the words!";
+                    message.style.color = "blue";
+                }
+            } else {
+                message.textContent = `Already found ${foundWord}!`;
+                message.style.color = "orange";
+            }
+        } else {
+            message.textContent = "Word not found.";
+            message.style.color = "red";
+            selectedCells.forEach(cell => cell.classList.remove('selected'));
+        }
+
+        selectedCells = []; // Reset selected cells
+    }
+
+
+
+    createBoard();
+    displayWords();
+</script>
+
+</body>
+</html>
