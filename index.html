@@ -1,126 +1,142 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MTR Games</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MTR Games</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f5f5f5;
+        color: #333;
+    }
 
-        header {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-        }
+    header {
+        background-color: #00bfff;
+        padding: 1rem 2rem;
+        color: white;
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
 
-        main {
-            padding: 2rem;
-            text-align: center; /* Center the content */
-        }
+    main {
+        padding: 2rem;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+    }
 
-        .app-card {
-            border: 1px solid #ddd;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 8px;
-            background-color: white; /* White background for the app cards */
-            box-shadow: 2px 2px 5px rgba(0,0,0,0.1); /* Add a subtle shadow */
-            display: inline-block; /* Arrange cards side by side */
-            width: 30%; /* Adjust width for desired layout */
-            vertical-align: top; /* Align cards to the top of the container */
-            margin: 1%; /* Spacing between the cards */
-        }
+    .game-card {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        text-align: center;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        cursor: pointer;
+    }
 
-        .app-card img {
-            max-width: 100px;
-            height: auto;
-            margin-bottom: 10px;
-        }
+    .game-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
 
-        .app-card h2 {
-            margin-bottom: 5px;
-        }
+    .game-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
 
-        .download-button {
-            display: inline-block;
-            padding: 10px 20px;
-            background-color: #007bff; /* Blue button */
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-        }
-        .download-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-        }
+    .game-info {
+        padding: 1rem;
+    }
 
-        footer {
-            background-color: #333;
-            color: #fff;
-            padding: 1rem 0;
-            text-align: center;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-    </style>
+    .game-info h2 {
+        font-size: 1.2rem;
+        margin: 0.5rem 0;
+    }
+
+    .game-info p {
+        font-size: 0.9rem;
+        color: #666;
+    }
+
+    .play-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding: 10px 20px;
+        background-color: #00bfff;
+        color: white;
+        border-radius: 5px;
+        text-decoration: none;
+        transition: background 0.2s;
+    }
+
+    .play-btn:hover {
+        background-color: #0099cc;
+    }
+</style>
 </head>
 <body>
 
-<header>
-    <h1>Welcome to MTR Games</h1>
-</header>
+<header>MTR Games</header>
 
 <main>
-    <div class="app-card">
-        <img src="O.png" width="100">
-        <iframe src="OX.html" width="400" height="500"></iframe>
-        <h2>Tic-Tac-Toe</h2>
-        <p>Available on skill games.</p>
+    <div class="game-card" onclick="window.location.href='OX.html'">
+        <img src="O.png" alt="Tic Tac Toe">
+        <div class="game-info">
+            <h2>Tic-Tac-Toe</h2>
+            <p>Challenge your brain in this classic game.</p>
+            <a href="OX.html" class="play-btn">Play</a>
+        </div>
     </div>
 
-    <div class="app-card">
-        <img src="Maths%20Quiz.png" width="100">
-        <iframe src="Maths.html" width="400" height="200"></iframe>
-        <h2>Maths Quiz</h2>
-        <p>Helps in solving Maths Questions.</p>
+    <div class="game-card" onclick="window.location.href='Maths.html'">
+        <img src="Maths%20Quiz.png" alt="Maths Quiz">
+        <div class="game-info">
+            <h2>Maths Quiz</h2>
+            <p>Test your math skills with fun quizzes.</p>
+            <a href="Maths.html" class="play-btn">Play</a>
+        </div>
     </div>
 
-    <div class="app-card">
-        <img src="snake.png" width="100">
-        <iframe src="Snake.html" width="400" height="400"></iframe>
-        <h2>Snake Game</h2>
-        <p>Available on skill games.</p>
+    <div class="game-card" onclick="window.location.href='Snake.html'">
+        <img src="snake.png" alt="Snake Game">
+        <div class="game-info">
+            <h2>Snake Game</h2>
+            <p>Eat, grow, and avoid hitting yourself.</p>
+            <a href="Snake.html" class="play-btn">Play</a>
+        </div>
     </div>
 
-    <div class="app-card">
-        <img src="word.png" width="20">
-        <iframe src="WordSearch.html" width="400" height="650"></iframe>
-        <h2>Word Search</h2>
-        <p>Available on skill games.</p>
+    <div class="game-card" onclick="window.location.href='WordSearch.html'">
+        <img src="word.png" alt="Word Search">
+        <div class="game-info">
+            <h2>Word Search</h2>
+            <p>Find all the hidden words.</p>
+            <a href="WordSearch.html" class="play-btn">Play</a>
+        </div>
     </div>
 
-    <div class="app-card">
-        <img src="Space_shooter.png" width="100">
-        <iframe src="Space_shooter.html" width="500" height="500"></iframe>
-        <h2>Space Shooter</h2>
-        <p>Available on skill games.</p>
+    <div class="game-card" onclick="window.location.href='Space_shooter.html'">
+        <img src="Space_shooter.png" alt="Space Shooter">
+        <div class="game-info">
+            <h2>Space Shooter</h2>
+            <p>Blast your way through enemies in space.</p>
+            <a href="Space_shooter.html" class="play-btn">Play</a>
+        </div>
     </div>
 
-    <div class="app-card">
-        <img src="Ball_Catcher.png" width="100">
-        <iframe src="Ball_Catch.html" width="500" height="500"></iframe>
-        <h2>Space Shooter</h2>
-        <p>Available on skill games.</p>
+    <div class="game-card" onclick="window.location.href='Ball_Catch.html'">
+        <img src="Ball_Catcher.png" alt="Ball Catcher">
+        <div class="game-info">
+            <h2>Ball Catcher</h2>
+            <p>Catch the falling balls and score points.</p>
+            <a href="Ball_Catch.html" class="play-btn">Play</a>
+        </div>
     </div>
 </main>
 
 </body>
 </html>
-
